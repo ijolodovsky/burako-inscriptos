@@ -30,14 +30,35 @@ function App() {
             <thead className="bg-gray-50">
               <tr>
                 {data[0] &&
-                  Object.keys(data[0]).map((key) => (
-                    <th
-                      key={key}
-                      className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-200 last:border-r-0"
-                    >
-                      {key}
-                    </th>
-                  ))}
+                  Object.keys(data[0]).map((key) => {
+                    // Mapeo de nombres de columnas más amigables
+                    const columnNames = {
+                      'Marca temporal': 'Fecha',
+                      'Nombre y Apellido': 'Nombre',
+                      'Edad': 'Edad',
+                      'Numero de contacto (WhatsApp)': 'WhatsApp',
+                      'Mail': 'Email',
+                      '¿Querés anotarte a Burako, Truco o ambos?': 'Juego',
+                      '¿Te anotas con pareja o individual?': 'Modalidad',
+                      'Nombre de tu pareja (si tenés)': 'Pareja',
+                      '¿Podes colaborar trayendo tu burako?': 'Burako',
+                      '¿Querés dejarnos algún comentario, consulta o aclaración?': 'Comentarios',
+                      'Modalidad de pago': 'Pago',
+                      'Comprobante': 'Comprobante'
+                    };
+                    
+                    const displayName = columnNames[key] || key;
+                    
+                    return (
+                      <th
+                        key={key}
+                        className="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-r border-gray-200 last:border-r-0"
+                        title={key} // Tooltip con el nombre completo
+                      >
+                        {displayName}
+                      </th>
+                    );
+                  })}
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -49,7 +70,8 @@ function App() {
                   {Object.values(row).map((val, j) => (
                     <td
                       key={j}
-                      className="px-3 py-2 text-xs text-gray-700 border-r border-gray-200 last:border-r-0 whitespace-pre-line"
+                      className="px-2 py-2 text-xs text-gray-700 border-r border-gray-200 last:border-r-0 max-w-xs truncate"
+                      title={val} // Tooltip para ver contenido completo
                     >
                       {val}
                     </td>
