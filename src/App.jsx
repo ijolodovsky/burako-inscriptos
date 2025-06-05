@@ -19,34 +19,47 @@ function App() {
   }, []);
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">
-        Inscriptos al evento: Burako, Truco y Diversión
-      </h1>
-      <table className="table-auto w-full border">
-        <thead>
-          <tr>
-            {data[0] &&
-              Object.keys(data[0]).map((key) => (
-                <th key={key} className="border px-2 py-1 text-left bg-gray-200">
-                  {key}
-                </th>
-              ))}
+    <div className="p-8 max-w-7xl mx-auto">
+  <h1 className="text-3xl font-bold mb-6 text-center">
+    Inscriptos al evento: Burako, Truco y Diversión
+  </h1>
+
+  <div className="overflow-x-auto rounded-lg shadow">
+    <table className="min-w-full table-auto border-collapse">
+      <thead>
+        <tr className="bg-gray-100 text-left">
+          {data[0] &&
+            Object.keys(data[0]).map((key) => (
+              <th
+                key={key}
+                className="px-4 py-3 border text-sm font-semibold text-gray-700"
+              >
+                {key}
+              </th>
+            ))}
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((row, i) => (
+          <tr
+            key={i}
+            className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}
+          >
+            {Object.values(row).map((val, j) => (
+              <td
+                key={j}
+                className="px-4 py-2 border text-sm text-gray-800 whitespace-pre-line"
+              >
+                {val}
+              </td>
+            ))}
           </tr>
-        </thead>
-        <tbody>
-          {data.map((row, i) => (
-            <tr key={i}>
-              {Object.values(row).map((val, j) => (
-                <td key={j} className="border px-2 py-1">
-                  {val}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
   );
 }
 
